@@ -1,0 +1,333 @@
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        name: Cell Voltage Delta
+        size: 25%
+        entity: sensor.seplos_bms_delta_cell_voltage
+        show_icon: true
+        show_name: true
+        show_state: true
+        show_label: false
+        label: >
+          [[[ return 'Average Cell: ' +
+          Number.parseFloat(states['sensor.seplos_bms_average_cell_voltage'].state).toFixed(2)
+          + ' V']]]
+        icon: mdi:delta
+        styles:
+          icon:
+            - color: |
+                [[[
+                  if (entity.state < 0.010) return 'darkgreen';
+                  if (entity.state < 0.020) return 'darkorange';
+                  else return 'red';
+                ]]]
+          card:
+            - font-size: 12px
+      - type: custom:button-card
+        name: Pack Voltage
+        size: 25%
+        entity: sensor.seplos_bms_total_voltage
+        show_icon: true
+        show_name: true
+        show_state: true
+        show_label: true
+        icon: mdi:server
+        styles:
+          icon:
+            - color: |
+                [[[
+                  if (entity.state > 50) return 'darkgreen';
+                  if (entity.state > 55) return 'darkorange';
+                  else return 'red';
+                ]]]
+          card:
+            - font-size: 12px
+      - type: custom:button-card
+        name: |
+          [[[
+            if (entity.state < 0) return "Discharging";
+            else
+              return "Charging";
+          ]]]
+        size: 25%
+        entity: sensor.seplos_bms_power
+        show_icon: true
+        show_name: true
+        show_state: true
+        show_label: true
+        icon: |
+          [[[
+            if (entity.state < 0) return "mdi:battery-arrow-down-outline";
+            else
+              return "mdi:battery-arrow-up-outline";
+          ]]]
+        styles:
+          icon:
+            - color: |
+                [[[
+                  if (entity.state > 5000) return 'darkred';
+                  if (entity.state > 1000) return 'darkorange';
+                  if (entity.state < -5000) return 'darkred';
+                  if (entity.state < -1000) return 'darkorange';
+                  else return 'darkgreen';
+                ]]]
+          card:
+            - font-size: 12px
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        name: SOC
+        size: 25%
+        entity: sensor.seplos_bms_state_of_charge
+        show_icon: true
+        show_name: true
+        show_state: true
+        show_label: true
+        icon: |
+          [[[
+            if (entity.state > 90) return "mdi:battery";
+            if (entity.state > 80) return "mdi:battery-90";
+            if (entity.state > 70) return "mdi:battery-80";
+            if (entity.state > 60) return "mdi:battery-70";
+            if (entity.state > 50) return "mdi:battery-60";
+            if (entity.state > 40) return "mdi:battery-50";
+            if (entity.state > 30) return "mdi:battery-40";
+            if (entity.state > 20) return "mdi:battery-30";
+            if (entity.state > 10) return "mdi:battery-20";
+            else
+              return "mdi:battery-alert-variant-outline";
+          ]]]
+        styles:
+          icon:
+            - color: |
+                [[[
+                  if (entity.state > 30 ) return 'darkgreen';
+                  if (entity.state > 15 ) return 'yellow';
+                  else return 'red';
+                ]]]
+          card:
+            - font-size: 12px
+      - type: custom:button-card
+        name: SOH
+        size: 25%
+        entity: sensor.seplos_bms_state_of_health
+        show_icon: true
+        show_name: true
+        show_state: true
+        show_label: true
+        styles:
+          icon:
+            - color: |
+                [[[
+                  if (entity.state > 99) return 'darkgreen';
+                  if (entity.state > 95) return 'darkorange';
+                  else return 'red';
+                ]]]
+          card:
+            - font-size: 12px
+      - type: custom:button-card
+        name: Charging Cycles
+        size: 25%
+        entity: sensor.seplos_bms_charging_cycles
+        show_icon: true
+        show_name: true
+        show_state: true
+        show_label: true
+        styles:
+          icon:
+            - color: |
+                [[[
+                  if (entity.state > 5000) return 'darkred';
+                  else return 'darkgreen';
+                ]]]
+          card:
+            - font-size: 12px
+  - type: custom:bar-card
+    direction: up
+    columns: 8
+    decimal: 3
+    max: 3.45
+    min: 3
+    height: 80px
+    severity:
+      - color: darkred
+        from: 3.45
+        to: 4
+      - color: darkorange
+        from: 3.4
+        to: 3.45
+      - color: darkgreen
+        from: 3.1
+        to: 3.4
+      - color: darkred
+        from: 2.5
+        to: 3.1
+    positions:
+      icon: 'off'
+      indicator: inside
+      name: outside
+    style: |-
+      bar-card-value {
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 35px;
+        font-size: 10px;
+        font-weight: normal;
+        text-shadow: 1px 1px #0005;
+      }
+      bar-card-name {
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 0px;
+        font-size: 10px;
+        font-weight: normal;
+        text-shadow: 1px 1px #0005;
+      }
+    entities:
+      - entity: sensor.seplos_bms_cell_voltage_1
+        name: Cell 01
+      - entity: sensor.seplos_bms_cell_voltage_2
+        name: Cell 02
+      - entity: sensor.seplos_bms_cell_voltage_3
+        name: Cell 03
+      - entity: sensor.seplos_bms_cell_voltage_4
+        name: Cell 04
+      - entity: sensor.seplos_bms_cell_voltage_5
+        name: Cell 05
+      - entity: sensor.seplos_bms_cell_voltage_6
+        name: Cell 06
+      - entity: sensor.seplos_bms_cell_voltage_7
+        name: Cell 07
+      - entity: sensor.seplos_bms_cell_voltage_8
+        name: Cell 08
+      - entity: sensor.seplos_bms_cell_voltage_9
+        name: Cell 09
+      - entity: sensor.seplos_bms_cell_voltage_10
+        name: Cell 10
+      - entity: sensor.seplos_bms_cell_voltage_11
+        name: Cell 11
+      - entity: sensor.seplos_bms_cell_voltage_12
+        name: Cell 12
+      - entity: sensor.seplos_bms_cell_voltage_13
+        name: Cell 13
+      - entity: sensor.seplos_bms_cell_voltage_14
+        name: Cell 14
+      - entity: sensor.seplos_bms_cell_voltage_15
+        name: Cell 15
+      - entity: sensor.seplos_bms_cell_voltage_16
+        name: Cell 16
+  - type: custom:apexcharts-card
+    graph_span: 24h
+    update_interval: 5min
+    yaxis:
+      - id: first
+        decimals: 0
+        min: ~-6000
+        max: ~6000
+        apex_config:
+          tickAmount: 8
+      - id: second
+        opposite: true
+        decimals: 0
+        min: 0
+        max: 100
+        apex_config:
+          tickAmount: 4
+    apex_config:
+      chart:
+        height: 300px
+      xaxis:
+        type: datetime
+        labels:
+          show: false
+        tooltip:
+          enabled: false
+      grid:
+        show: true
+        xaxis:
+          lines:
+            show: false
+        yaxis:
+          lines:
+            show: true
+        position: back
+        strokeDashArray: 0.2
+      legend:
+        show: true
+    all_series_config:
+      show:
+        legend_value: true
+        datalabels: false
+        extremas: false
+        in_brush: false
+        in_header: false
+      float_precision: 0
+      invert: false
+      fill_raw: 'null'
+    header:
+      show: false
+      title: Overblik
+      show_states: true
+      colorize_states: false
+    series:
+      - entity: sensor.seplos_bms_state_of_charge
+        name: SOC
+        opacity: 1
+        stroke_width: 1.5
+        type: line
+        group_by:
+          duration: 1min
+          func: avg
+        show:
+          legend_value: true
+          name_in_header: true
+          in_header: raw
+        yaxis_id: second
+        float_precision: 1
+        color: gold
+      - entity: sensor.seplos_bms_power
+        name: Power
+        opacity: 1
+        stroke_width: 1.5
+        type: line
+        group_by:
+          duration: 1min
+          func: max
+        show:
+          legend_value: true
+          name_in_header: true
+          in_header: raw
+        yaxis_id: first
+        color: orange
+      - entity: sensor.seplos_bms_temperature_4
+        name: Temp
+        opacity: 0.8
+        stroke_width: 1.5
+        type: line
+        group_by:
+          duration: 1min
+          func: avg
+        show:
+          legend_value: true
+          name_in_header: true
+          in_header: raw
+        yaxis_id: second
+        float_precision: 1
+        color: dodgerblue
+      - entity: sensor.seplos_bms_total_voltage
+        name: Pack
+        opacity: 0.8
+        stroke_width: 1.5
+        type: line
+        group_by:
+          duration: 1min
+          func: avg
+        show:
+          legend_value: true
+          name_in_header: true
+          in_header: raw
+        yaxis_id: second
+        float_precision: 1
+        color: red
