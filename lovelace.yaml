@@ -168,23 +168,24 @@ cards:
       icon: 'off'
       indicator: inside
       name: outside
-    style: |-
-      bar-card-value {
-        margin-right: auto;
-        margin-left: auto;
-        margin-bottom: 35px;
-        font-size: 10px;
-        font-weight: normal;
-        text-shadow: 1px 1px #0005;
-      }
-      bar-card-name {
-        margin-right: auto;
-        margin-left: auto;
-        margin-bottom: 0px;
-        font-size: 10px;
-        font-weight: normal;
-        text-shadow: 1px 1px #0005;
-      }
+    card_mod:
+      style: |-
+        bar-card-value {
+          margin-right: auto;
+          margin-left: auto;
+          margin-bottom: 35px;
+          font-size: 10px;
+          font-weight: normal;
+          text-shadow: 1px 1px #0005;
+        }
+        bar-card-name {
+          margin-right: auto;
+          margin-left: auto;
+          margin-bottom: 0px;
+          font-size: 10px;
+          font-weight: normal;
+          text-shadow: 1px 1px #0005;
+        }
     entities:
       - entity: sensor.seplos_bms_cell_voltage_1
         name: Cell 01
