@@ -1,5 +1,5 @@
 # HA-seplos-bms
-Home Assistant Dashboard BMS'es, based on sensor-data from Seplos BMS by https://github.com/syssi/esphome-seplos-bms/
+Home Assistant Dashboard for BMS'es, based on sensor-data from Seplos BMS by https://github.com/syssi/esphome-seplos-bms/
 Can be used for any HA-connected BMS with small modifications
 
 
