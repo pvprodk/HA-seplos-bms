@@ -10,6 +10,7 @@ Can be used for any HA-connected BMS with small modifications
 -   custom:button-card
 -   custom:bar-card
 -   custom:apexcharts-card
+-   card-mod
 - You can obviously modify the card to show more than one battery bank
 
 ![Example 1](https://i.imgur.com/BAb5DpP.png))
